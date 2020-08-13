@@ -62,5 +62,3 @@ if ("serviceWorker" in navigator) {
       .catch(err => console.log("service worker not registered", err));
   });
 }
-
-window.location.replace("appny/Line Chart.html");
