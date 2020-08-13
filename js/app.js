@@ -63,4 +63,4 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-window.location.replace("\appny\Line Chart.html");
+window.location.replace("appny/Line Chart.html");
