@@ -62,12 +62,3 @@ if ("serviceWorker" in navigator) {
       .catch(err => console.log("service worker not registered", err));
   });
 }
-
-
-var r = new XMLHttpRequest();
-r.open("POST", "http://192.168.43.202:8000/reload_0/?htmlonly=1", true);
-r.onreadystatechange = function () {
-  if (r.readyState != 4 || r.status != 200) return;
-  alert("Success: " + r.responseText);
-};
-r.send("banana=yellow");
