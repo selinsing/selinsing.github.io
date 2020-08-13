@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)https://www.chartjs.org/samples/latest/charts/line/basic.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Line Chart</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script async="" src="./Line Chart_files/analytics.js.download"></script>
+    <script src="./Line Chart_files/Chart.min.js.download"></script>
+    <script src="./Line Chart_files/utils.js.download"></script>
+    <style>
+	canvas{
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	</style>
+
+    <style type="text/css">/* Chart.js */
+@keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}
+</style>
+    <style type="text/css">/* Chart.js */
+@keyframes chartjs-render-animation0{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor0{animation:chartjs-render-animation0 1ms}.chartjs-size-monitor0,.chartjs-size-monitor0-expand,.chartjs-size-monitor0-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor0-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor0-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}
+</style>
+<!-- SWeet Alert -->
+ <link rel="stylesheet" href="sweetALert/assets/css/app.css">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+    <script src="sweetALert/assets/sweetalert/sweetalert.min.js"></script>
+	
+</head>
+
+<body>
+<a href="kirimDataWebview.html" style="">etc</a><br><br>
+<a href="#" onclick="sendToAndroid();" style="">sendToAndroid()</a><br><br>
+<a href="#" style="display:none;" onclick='swal("Woiiiii !!", "You clicked the button!", "warning");' >Anu swal</a>
+<a href="#" id="hidupnotifikasitombol" onclick='localStorage.setItem("diamkan",null);swal({title:"Berhasil dihidupkan lagi", icon: "success"});$("#hidupnotifikasitombol").hide();' >Hidupkan Notifikasi</a>
+<br>
+<div style="width:100%;"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+    <canvas id="canvas1" style="display: block; width: 1013px; height: 506px;" width="933" height="506" class="chartjs-render-monitor"></canvas>
+</div>
+<!-- <button id="randomizeData1">Empty</button> -->
+
+<div style="width:100%;"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+    <canvas id="canvas2" style="display: block; width: 1013px; height: 506px;" width="933" height="506" class="chartjs-render-monitor"></canvas>
+</div>
+<!-- <button id="randomizeData2">Empty</button> -->
+
+<div style="width:100%;"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+    <canvas id="canvas3" style="display: block; width: 1013px; height: 506px;" width="933" height="506" class="chartjs-render-monitor"></canvas>
+</div>
+<!-- <button id="randomizeData3">Empty</button> -->
+
+<script>
+		window.onload = function() {
+			var ctx1 = document.getElementById('canvas1').getContext('2d');
+			window.myLine1 = new Chart(ctx1, config1);
+			var ctx2 = document.getElementById('canvas2').getContext('2d');
+			window.myLine2 = new Chart(ctx2, config2);
+			var ctx3 = document.getElementById('canvas3').getContext('2d');
+			window.myLine3 = new Chart(ctx3, config3);
+
+			Chart.defaults.global.defaultFontSize = 12;
+		};
+
+		function terformatTanggal(tgl){
+			const date = new Date(tgl);  // 2009-11-10
+			const terformat = date.toLocaleString('id-ID', {day: '2-digit', month: 'long'});
+			//return('');
+			return(terformat);
+		}
+
+		//ajax
+		meloading();
+		function meloading(){
+
+			 $.ajax({
+				//url: \'' . Yii::$app->request->baseUrl . '/tester/fetch-mobile?start=' . '\'+start+"&end="+end,
+				//url: "http://ummibagus.com/tambakudang/lihatData.php",
+				url: "http://ummibagus.com/tambakudang/pengingatData.php?random="+Math.random(),
+				context: this,
+				//dataType: "json",
+				success: function (mendata) {
+					//alert(mendata);
+					mendata=JSON.parse(mendata);
+					console.log(mendata.pengingat);
+					//msg
+					$.each(mendata.data, function( index, value ) {
+					  lab=[value[4].split(" ")[1], " "+terformatTanggal(value[4].split(" ")[0])];
+
+					  labelnya1.push(lab);
+					  satu_.push(value[1]);
+
+					  labelnya2.push(lab);
+					  dua_.push(value[2]);
+
+					  labelnya3.push(lab);
+					  tiga_.push(value[3]);
+					});
+
+					randomizeData1();
+					randomizeData2();
+					randomizeData3();
+					
+					//mendata.pengingat
+					if( (mendata.pengingat!=null) && (localStorage.getItem("diamkan")=="null") ){
+						var myhtml = document.createElement("div");
+						 myhtml.innerHTML = mendata.pengingat;
+						 if(typeof javascript_object !== 'undefined'){ //utk debug di browser supaya tidak error
+							if(document.visibilityState=="hidden"){
+								javascript_object.showToast(mendata.pengingat)
+							}
+						 }
+						swal({
+							title:"Perhatian !!", 
+							icon: "warning",
+							content: myhtml,
+							 buttons: {
+								senyapkan: true,
+								cancel: "Auklah",
+							  },
+							})
+							.then((value) => {
+							  switch (value) {							 
+								case "senyapkan":
+								  mensenyapkan();
+								  break;							 
+								default:
+								  //swal("Got away safely!");
+							  }});
+					}
+					else{
+						if(swal.getState().isOpen){
+							swal.close()
+						}
+					}
+
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					//alert("error");
+					swal("Tidak terkoneksi !!", "Mohon cek internet anda!", "error");
+				}
+			});
+		}
+
+		setInterval(function(){meloading(); }, 12000);
+	</script>
+
+<script>
+	var size12=12;
+		var config1 = {
+			type: 'line',
+			data: {
+				labels: ['Null', 'Null', 'Null', 'Null', 'Null'],
+				datasets: [{
+					label: 'PH',
+					backgroundColor: window.chartColors.red,
+					borderColor: window.chartColors.red,
+					data: [0,0,0,0,0],
+					fill: false,
+					borderWidth:3,
+				}]
+			},
+			options: {
+				responsive: true,
+				//title: {display: true,text: 'Title'},
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+					xPadding:size12,
+					yPadding:size12,
+					caretSize:size12,
+					cornerRadius:size12
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						//scaleLabel: {display: true,labelString: 'Waktu'}
+					}],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'PH'
+						}
+					}]
+				}
+			}
+		};
+
+		//window.onload = function() {
+		//	var ctx2 = document.getElementById('canvas2').getContext('2d');
+		//	window.myLine2 = new Chart(ctx2, config2);
+		//};
+		var satu_=[];
+		var labelnya1=[];
+		//document.getElementById('randomizeData1').addEventListener('click', function() {
+		//	randomizeData1();
+		//});
+
+		function randomizeData1(){
+			var i=2;
+			config1.data.datasets.forEach(function(dataset) {
+				//dataset.data = dataset.data.map(function() {
+				//	return randomScalingFactor();
+				//});
+				config1.data.datasets[0].data=satu_;
+				//config2.data.labels=['berga', 'asdsa', 'asd', 'yry', 'dfg'];
+
+			});
+			config1.data.labels=labelnya1;
+			window.myLine1.update();
+			//dataset.data.shift();
+				satu_=[];
+				labelnya1=[];
+		}
+	</script>
+
+<script>
+		var config2 = {
+			type: 'line',
+			data: {
+				labels: ['Null', 'Null', 'Null', 'Null', 'Null'],
+				datasets: [{
+					label: 'Suhu',
+					fill: false,
+					backgroundColor: window.chartColors.blue,
+					borderColor: window.chartColors.blue,
+					data: [0,0,0,0,0],
+					borderWidth:3,
+				}]
+			},
+			options: {
+				responsive: true,
+				//title: {display: true,text: 'Title'},
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+					xPadding:size12,
+					yPadding:size12,
+					caretSize:size12,
+					cornerRadius:size12
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						//scaleLabel: {display: true,labelString: 'Waktu'}
+					}],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Celsius'
+						}
+					}]
+				}
+			}
+		};
+
+		//window.onload = function() {
+		//	var ctx2 = document.getElementById('canvas2').getContext('2d');
+		//	window.myLine2 = new Chart(ctx2, config2);
+		//};
+		var dua_=[];
+		var labelnya2=[];
+		//document.getElementById('randomizeData2').addEventListener('click', function() {
+		//	randomizeData2();
+		//});
+
+		function randomizeData2(){
+			var i=2;
+			config2.data.datasets.forEach(function(dataset) {
+				//dataset.data = dataset.data.map(function() {
+				//	return randomScalingFactor();
+				//});
+				config2.data.datasets[0].data=dua_;
+				//config2.data.labels=['berga', 'asdsa', 'asd', 'yry', 'dfg'];
+
+			});
+			config2.data.labels=labelnya2;
+			window.myLine2.update();
+			//dataset.data.shift();
+				dua_=[];
+				labelnya2=[];
+		}
+	</script>
+
+<script>
+		var config3 = {
+			type: 'line',
+			data: {
+				labels: ['Null', 'Null', 'Null', 'Null', 'Null'],
+				datasets: [{
+					label: 'Arus',
+					fill: false,
+					backgroundColor: window.chartColors.purple,
+					borderColor: window.chartColors.purple,
+					data: [0,0,0,0,0],
+					borderWidth:3,
+				}]
+			},
+			options: {
+				responsive: true,
+				//title: {display: true,text: 'Title'},
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+					xPadding:size12,
+					yPadding:size12,
+					caretSize:size12,
+					cornerRadius:size12
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						//scaleLabel: {display: true,labelString: 'Waktu'}
+					}],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'm/s'
+						}
+					}]
+				}
+			}
+		};
+
+		var tiga_=[];
+		var labelnya3=[];
+		//document.getElementById('randomizeData3').addEventListener('click', function() {
+		//	randomizeData3();
+		//});
+
+		function randomizeData3(){
+			var i=2;
+			config3.data.datasets.forEach(function(dataset) {
+				//dataset.data = dataset.data.map(function() {
+				//	return randomScalingFactor();
+				//});
+				config3.data.datasets[0].data=tiga_;
+				//config2.data.labels=['berga', 'asdsa', 'asd', 'yry', 'dfg'];
+
+			});
+			config3.data.labels=labelnya3;
+			window.myLine3.update();
+			//dataset.data.shift();
+				tiga_=[];
+				labelnya3=[];
+		}
+		
+		//untuk tombol hidupkan lagi senyap
+		if(localStorage.getItem("diamkan")=="null"){
+			$("#hidupnotifikasitombol").hide();
+		}
+		
+		//dari js ke andro PENGHUBUNG		
+		function sendToAndroid()
+		{
+			//var str=document.getElementById('input').value;
+			javascript_object.showToast("TEs /n Notip");
+		}
+		
+		function mensenyapkan(){
+			localStorage.setItem("diamkan",true);
+			$("#hidupnotifikasitombol").show();
+			swal({title:"Berhasil disenyapkan", icon: "success"});
+		}
+		
+		//debug visible hidden tab/apps
+		//document.addEventListener('visibilitychange', function(){
+		//	//if(document.visibilityState=="hidden")
+		//	javascript_object.showToast(document.visibilityState);
+		//	//alert(document.visibilityState);
+		//})
+	</script>
+
+</body></html>
