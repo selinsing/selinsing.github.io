@@ -58,11 +58,11 @@
   //var namahost="http://localhost";
   //var namahost="http://192.168.1.140";
   var namahost="http://ummibagus.com";
-  $("#idusername").val(localStorage.getItem("datalogin"));
+  document.getElementById("idusername").value = localStorage.getItem("datalogin");
   function cekLogin(){
-    var vusername=$("#idusername").val();
+    var vusername=document.getElementById("idusername").value
      localStorage.setItem("datalogin",vusername);
-    $("#warning").html("Selamat Datang");
+     document.getElementById("masuk").text = "Selamat Datang";
     // window.location='Line Chart.html#';  
     // window.location='http://'+vusername+':3030/appny/Line%20Chart.html'; 
     window.location='http://'+vusername+':3030/appny/Nurul%20Huda.html#'+vusername; 
