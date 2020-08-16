@@ -59,14 +59,24 @@
   //var namahost="http://192.168.1.140";
   var namahost="http://ummibagus.com";
   document.getElementById("idusername").value = localStorage.getItem("datalogin");
-  function cekLogin(){
+  
+   var vusername=document.getElementById("idusername").value
+   document.getElementById("masuk").href='http://'+vusername+':3030/appny/Nurul%20Huda.html#'+vusername;
+  // function cekLogin(){
+  //   var vusername=document.getElementById("idusername").value
+  //    localStorage.setItem("datalogin",vusername);
+  //    document.getElementById("masuk").text = "Selamat Datang";
+  //         // window.location='Line Chart.html#';  
+  //         // window.location='http://'+vusername+':3030/appny/Line%20Chart.html'; 
+  //         // window.location='http://'+vusername+':3030/appny/Nurul%20Huda.html#'+vusername; 
+  //   window.open('http://'+vusername+':3030/appny/Nurul%20Huda.html#'+vusername);
+  // }
+
+  function ketika(){
+    alert();
     var vusername=document.getElementById("idusername").value
      localStorage.setItem("datalogin",vusername);
-     document.getElementById("masuk").text = "Selamat Datang";
-    // window.location='Line Chart.html#';  
-    // window.location='http://'+vusername+':3030/appny/Line%20Chart.html'; 
-    // window.location='http://'+vusername+':3030/appny/Nurul%20Huda.html#'+vusername; 
-    window.open('http://'+vusername+':3030/appny/Nurul%20Huda.html#'+vusername);
+    document.getElementById("masuk").href='http://'+vusername+':3030/appny/Nurul%20Huda.html#'+vusername;
   }
 
 
