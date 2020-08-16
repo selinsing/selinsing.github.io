@@ -61,13 +61,13 @@
   $("#idusername").val(localStorage.getItem("datalogin"));
   function cekLogin(){
     var vusername=$("#idusername").val();
-    // localStorage.setItem("datalogin",vusername);
+     localStorage.setItem("datalogin",vusername);
     $("#warning").html("Selamat Datang");
     // window.location='Line Chart.html#';  
     // window.location='http://'+vusername+':3030/appny/Line%20Chart.html'; 
     window.location='http://'+vusername+':3030/appny/Nurul%20Huda.html#'+vusername; 
   }
-    
+
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function() {
