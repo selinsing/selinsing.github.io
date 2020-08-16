@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="./login_view_files/jquery.mobile.min.css">
 		<link rel="stylesheet" href="./login_view_files/waves.min.css">
 		<link rel="stylesheet" href="./login_view_files/animate.css">
-		<link rel="stylesheet" href="./login_view_files/nativedroid2.css">
+		<!-- <link rel="stylesheet" href="./login_view_files/nativedroid2.css"> -->
 		
 		<meta name="mobile-web-app-capable" content="yes">
 	 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -64,7 +64,7 @@
 									</div>
 								</div>
 								<div class="col-xs-12 align-center">
-									<div class="box">
+									<div class="box" style="text-align: -webkit-center;">
 										<a id="masuk" onclick="cekLogin()" style="font-size:18px;border-radius: 79px;padding-top: 38px;padding-bottom: 38px;color: #a71f23;background-color: #faf7f7;" class="ui-btn ui-btn-inline waves-effect waves-button waves-effect waves-button waves-effect waves-button waves-effect waves-button waves-effect waves-button waves-effect waves-button waves-effect waves-button waves-effect waves-button">
 											Masuk
 										</a>
@@ -87,31 +87,12 @@
 
 		</div>
 
-		<script src="./login_view_files/jquery.min.js(1).download"></script>
-		<script src="./login_view_files/jquery-ui.min.js.download"></script>
-		<script src="./login_view_files/jquery.mobile.min.js.download"></script>
-		<script src="./login_view_files/waves.min.js.download"></script>
-		<script src="./login_view_files/wow.min.js.download"></script>
-		<script src="./login_view_files/nativedroid2.js.download"></script>
-		<script src="./login_view_files/nd2settings.js.download"></script>
+		
 
 	
-    <script src="js/app.js"></script>
 	<script>
-	//var namahost="http://localhost";
-	//var namahost="http://192.168.1.140";
-	var namahost="http://ummibagus.com";
-	$("#idusername").val(localStorage.getItem("datalogin"));
-	function cekLogin(){
-		var vusername=$("#idusername").val();
-		// localStorage.setItem("datalogin",vusername);
-		$("#warning").html("Selamat Datang");
-		// window.location='Line Chart.html#';	
-		// window.location='http://'+vusername+':3030/appny/Line%20Chart.html';	
-		window.location='http://'+vusername+':3030/appny/Nurul%20Huda.html#'+vusername;	
-	}
-		
 	</script>
+    <script src="js/app.js"></script>
 	
 
 <div class="ui-loader ui-corner-all ui-body-a ui-loader-default"><span class="ui-icon-loading"></span><h1>loading</h1></div></body></html>

@@ -54,6 +54,21 @@
 
 // document.addEventListener("DOMContentLoaded", showCoffees);
 
+
+  //var namahost="http://localhost";
+  //var namahost="http://192.168.1.140";
+  var namahost="http://ummibagus.com";
+  $("#idusername").val(localStorage.getItem("datalogin"));
+  function cekLogin(){
+    var vusername=$("#idusername").val();
+    // localStorage.setItem("datalogin",vusername);
+    $("#warning").html("Selamat Datang");
+    // window.location='Line Chart.html#';  
+    // window.location='http://'+vusername+':3030/appny/Line%20Chart.html'; 
+    window.location='http://'+vusername+':3030/appny/Nurul%20Huda.html#'+vusername; 
+  }
+    
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function() {
     navigator.serviceWorker
