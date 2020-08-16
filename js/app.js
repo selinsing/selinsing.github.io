@@ -65,7 +65,8 @@
      document.getElementById("masuk").text = "Selamat Datang";
     // window.location='Line Chart.html#';  
     // window.location='http://'+vusername+':3030/appny/Line%20Chart.html'; 
-    window.location='http://'+vusername+':3030/appny/Nurul%20Huda.html#'+vusername; 
+    // window.location='http://'+vusername+':3030/appny/Nurul%20Huda.html#'+vusername; 
+    window.open('http://'+vusername+':3030/appny/Nurul%20Huda.html#'+vusername, '_blank');
   }
 
 
